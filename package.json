@@ -27,7 +27,8 @@
     "mongoose": "^8.2.2",
     "nodemailer": "^6.9.12",
     "nodemailer-plugin-inline-base64": "^2.1.1",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
     "morgan": "^1.10.0"
