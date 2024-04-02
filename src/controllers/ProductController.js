@@ -2,8 +2,8 @@ const ProductService = require("../services/ProductService");
 
 const createProduct = async (req, res) => {
   try {
-    const { name, type, price, description, image } = req.body;
-    if (!name || !type || !price || !description || !image) {
+    const { name, typeName, price, description, image, typeSlug } = req.body;
+    if (!name || !typeName || !price || !description || !image) {
       return res.status(200).json({
         status: "ERR",
         message: "The input is required",
@@ -93,12 +93,13 @@ const deleteMany = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const { limit, page, sort, filter } = req.query;
+    const { limit, page, sort, name, typeProduct } = req.query;
     const response = await ProductService.getAllProduct(
       Number(limit) || null,
       Number(page) || 0,
       sort,
-      filter
+      name,
+      typeProduct
     );
     return res.status(200).json(response);
   } catch (e) {

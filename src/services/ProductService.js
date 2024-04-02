@@ -2,7 +2,7 @@ const Product = require("../models/ProductModel");
 
 const createProduct = (newProduct) => {
   return new Promise(async (resolve, reject) => {
-    const { name, type, price, description, image } = newProduct;
+    const { name, typeName, price, description, image, typeSlug } = newProduct;
     try {
       const checkProduct = await Product.findOne({
         name: name,
@@ -15,10 +15,11 @@ const createProduct = (newProduct) => {
       }
       const newProduct = await Product.create({
         name,
-        type,
+        typeName,
         price,
         description,
         image,
+        typeSlug,
       });
       if (newProduct) {
         resolve({
@@ -122,16 +123,16 @@ const getDetailsProduct = (id) => {
   });
 };
 
-const getAllProduct = (limit, page, sort, filter) => {
+const getAllProduct = (limit, page, sort, name, typeProduct) => {
   return new Promise(async (resolve, reject) => {
     try {
       const totalProduct = await Product.countDocuments();
       let allProduct = [];
-      if (filter) {
-        const label = filter[0];
-        const allObjectFilter = await Product.find({
-          [label]: { $regex: filter[1] },
-        })
+      if (name || typeProduct) {
+        const filter = {};
+        if (name) filter.name = { $regex: name };
+        if (typeProduct) filter.typeSlug = typeProduct;
+        const allObjectFilter = await Product.find(filter)
           .limit(limit)
           .skip(page * limit)
           .sort({ createdAt: -1, updatedAt: -1 });
@@ -189,7 +190,7 @@ const getAllProduct = (limit, page, sort, filter) => {
 const getAllType = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const allType = await Product.distinct("type");
+      const allType = await Product.distinct("typeName");
       resolve({
         status: "OK",
         message: "Success",
