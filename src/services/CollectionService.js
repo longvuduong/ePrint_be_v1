@@ -2,7 +2,7 @@ const Collection = require("../models/CollectionModel");
 
 const createCollection = (newCollection) => {
   return new Promise(async (resolve, reject) => {
-    const { typeName, typeSlug, pdf } = newCollection;
+    const { typeName, typeSlug, fileName, fileLink } = newCollection;
     try {
       const checkCollection = await Collection.findOne({
         typeName: typeName,
@@ -16,7 +16,8 @@ const createCollection = (newCollection) => {
       const newCollection = await Collection.create({
         typeName,
         typeSlug,
-        pdf,
+        fileName,
+        fileLink,
       });
       if (newCollection) {
         resolve({
@@ -26,6 +27,7 @@ const createCollection = (newCollection) => {
         });
       }
     } catch (e) {
+      console.log("🚀 ~ returnnewPromise ~ e:", e);
       reject(e);
     }
   });

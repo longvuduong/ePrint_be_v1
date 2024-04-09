@@ -2,8 +2,8 @@ const CollectionService = require("../services/CollectionService");
 
 const createCollection = async (req, res) => {
   try {
-    const { typeName, typeSlug, pdf } = req.body;
-    if (!typeName || !pdf) {
+    const { typeName, typeSlug, fileName, fileLink } = req.body;
+    if (!typeName || !fileName) {
       return res.status(200).json({
         status: "ERR",
         message: "The input is required",

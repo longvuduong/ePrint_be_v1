@@ -3,7 +3,8 @@ const collectionSchema = new mongoose.Schema(
   {
     typeName: { type: String, required: true },
     typeSlug: { type: String, required: true },
-    pdf: { type: String },
+    fileName: { type: String },
+    fileLink: { type: String },
   },
   {
     timestamps: true,
