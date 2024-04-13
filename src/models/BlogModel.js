@@ -6,6 +6,7 @@ const blogSchema = new mongoose.Schema(
     typeName: { type: String, required: true },
     typeSlug: { type: String, required: true },
     content: { type: String, required: true },
+    // desc: { type: String, required: true },
     image: { type: String },
   },
   {

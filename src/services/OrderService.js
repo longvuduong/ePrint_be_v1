@@ -84,7 +84,6 @@ const createOrder = (newOrder) => {
         }
       }
     } catch (e) {
-      //   console.log('e', e)
       reject(e);
     }
   });
@@ -123,7 +122,6 @@ const getAllOrderDetails = (id) => {
         data: order,
       });
     } catch (e) {
-      // console.log('e', e)
       reject(e);
     }
   });
@@ -148,7 +146,6 @@ const getOrderDetails = (id) => {
         data: order,
       });
     } catch (e) {
-      // console.log('e', e)
       reject(e);
     }
   });

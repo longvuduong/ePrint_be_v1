@@ -27,7 +27,6 @@ const createCollection = (newCollection) => {
         });
       }
     } catch (e) {
-      console.log("🚀 ~ returnnewPromise ~ e:", e);
       reject(e);
     }
   });

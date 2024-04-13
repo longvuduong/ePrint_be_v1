@@ -132,6 +132,7 @@ const getAllProduct = (limit, page, sort, name, typeProduct) => {
         const filter = {};
         if (name) filter.name = { $regex: name };
         if (typeProduct) filter.typeSlug = typeProduct;
+        const totalProduct = await Product.countDocuments(filter);
         const allObjectFilter = await Product.find(filter)
           .limit(limit)
           .skip(page * limit)
