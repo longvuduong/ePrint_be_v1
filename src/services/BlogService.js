@@ -111,12 +111,13 @@ const getDetailsBlog = (id) => {
 const getAllBlog = (limit, page, sort, name, typeBlog) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let allBlog = [];
       const totalBlog = await Blog.countDocuments();
+      let allBlog = [];
       if (name || typeBlog) {
         const filter = {};
         if (name) filter.name = { $regex: name };
         if (typeBlog) filter.typeSlug = typeBlog;
+        const totalBlog = await Blog.countDocuments(filter);
         const allObjectFilter = await Blog.find(filter)
           .limit(limit)
 
